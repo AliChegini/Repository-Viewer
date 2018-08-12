@@ -8,17 +8,27 @@
 
 import UIKit
 
-// Example API call
-// https://api.github.com/repositories?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53
-// Client ID: bf645279e7f46a051182
-// Client Secret: b8b7c8ecd5dd75c56c99d54810c1591a661e3a53
-
 
 class ViewController: UIViewController {
+    
+    let client = RepoViewerAPIClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        client.getObjects() { data, error in
+            let decoder = JSONDecoder()
+            guard let data = data else {
+                print("data is empty")
+                return
+            }
+            
+            let allResult = try? decoder.decode([Repository].self, from: data)
+            if let allResultUnwrapped = allResult {
+                print(allResultUnwrapped)
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +36,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
 
 }
+
+
 
