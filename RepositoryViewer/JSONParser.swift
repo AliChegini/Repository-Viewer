@@ -10,13 +10,23 @@ import Foundation
 
 struct Repository: Codable {
     var name: String?
+    var url: String?
     
     enum CodingKeys: String, CodingKey {
         case name
+        case url
     }
 }
+
+// TODO :
+// parse the required field for stars, forks and description by parsing the urls
+
 
 
 //struct AllRepos: Codable {
 //    let allRepositories: [Repository]
 //}
+
+
+
+
