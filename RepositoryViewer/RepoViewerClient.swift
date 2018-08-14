@@ -46,8 +46,13 @@ class RepoViewerAPIClient {
     }
     
     // method to get full info for a single repository using its url
-    func getSinglePack(url: URL, completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) {
-        let request = URLRequest(url: url)
+    func getSinglePack(url: RepositoryURL, completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) {
+        guard let readyStringURL = url.url else {
+            return
+        }
+        let readyURL = URL(string: readyStringURL)!
+        
+        let request = URLRequest(url: readyURL)
         let task = downloader.dataTask(with: request) { data, error in
             guard let data = data else {
                 completion(nil, error)
