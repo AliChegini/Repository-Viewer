@@ -11,12 +11,20 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var finalArray: [SingleRepository]? = nil
+    
     let extractor = Extractor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        extractor.extractProperties()
+        print("Starting the program... ")
+        
+        extractor.extractProperties { result, error in
+            //print(result.count)
+        }
+        
+    
     }
 
     override func didReceiveMemoryWarning() {

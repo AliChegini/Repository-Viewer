@@ -50,6 +50,10 @@ class JSONDownloader {
                     completion(nil, .invalidData)
                 }
             } else {  // The request has not succeeded - NOT OK
+                print(httpResponse.statusCode)
+                print("----------------------")
+                print(httpResponse.allHeaderFields.debugDescription)
+                print("----------------------")
                 completion(nil, .responseUnsuccessful)
             }
             
@@ -57,13 +61,6 @@ class JSONDownloader {
         return task
     }
     
-    
-    // helper method to alert the user about connection lost, to show the cached data later
-    func showAlert(){
-        let alert = UIAlertController(title: "Error", message: "No Internet Connection \n You can see the cached result...", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        alert.presentInOwnWindow(animated: true, completion: nil)
-    }
     
 }
 
