@@ -11,21 +11,64 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var finalArray: [SingleRepository]? = nil
+    var finalArray: [SingleRepository] = []
     
     let extractor = Extractor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Starting the program... ")
+        print("Starting the program...")
         
-        extractor.extractProperties { result, error in
-            //print(result.count)
+        let serialQueue = DispatchQueue(label: "serialQueue")
+        var count = 0
+        
+        extractor.extractProperties { object, error in
+            serialQueue.async { [weak self] in
+                count += 1
+                print(count)
+                if count == 300  {
+                    print("did complete")
+                    self?.didCompletePopulation()
+                    return
+                }
+                
+                guard let object = object else {
+                    print("Extractor did not reutrn data")
+                    return
+                }
+                
+                if let error = error {
+                    print("Error is \(error)")
+                }
+                
+                self?.finalArray.append(object)
+                
+            }
         }
         
-    
     }
+    
+    
+    func didCompletePopulation() {
+        // be aware, this is not called on the main thread
+        // if you need to update the UI from here then use the main thread
+        print("Final array is populated \(self.finalArray.count)")
+    }
+    
+    
+    func constructingFinalArray(completionBlock: @escaping ([SingleRepository]) -> Void) {
+        var fArrray: [SingleRepository] = []
+        extractor.extractProperties { data, error in
+            guard let data = data else {
+                print("Extractor did not reutrn data")
+                return
+            }
+            fArrray.append(data)
+            completionBlock(fArrray)
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -33,7 +76,6 @@ class ViewController: UIViewController {
     }
 
     
-
 }
 
 
