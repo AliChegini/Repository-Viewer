@@ -13,11 +13,11 @@ class RepoViewerAPIClient {
     // Example API call
     // https://api.github.com/repositories?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53
     
-    
-    
-    // 10 * 100 = 1000
-    // 10 - 1 = 9 because since=0 will include the first hundred
-    let numberOfHundredPacks = 2
+    // Note: because since=0 will include the first hundred, numberOfHundredPacks should always get decreamented by 1
+    // formula to change two following variables: numberOfHundredPacks = (totalRepos / 100) - 1
+    // for 1000 repository, numberOfHundredPacks will be 9
+    static let totalRepos = 500
+    let numberOfHundredPacks = 4
     
     fileprivate let clientIDAndSecret = "?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53"
     
@@ -73,7 +73,7 @@ class RepoViewerAPIClient {
             let request = URLRequest(url: url)
             let task = downloader.dataTask(with: request) { data, error in
                 guard let data = data else {
-                    print("from getFullPack() \(error)")
+                    print("Error from getFullPack(): \(error.debugDescription)")
                     completion(nil, error)
                     return
                 }
@@ -105,7 +105,7 @@ class RepoViewerAPIClient {
         let request = URLRequest(url: finalUrl)
         let task = downloader.dataTask(with: request) { data, error in
             guard let data = data else {
-                print("from getSinglePack() \(error)")
+                print("Error from getSinglePack() \(error.debugDescription)")
                 completion(nil, error)
                 return
             }

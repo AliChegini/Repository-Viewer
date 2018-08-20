@@ -50,10 +50,10 @@ class JSONDownloader {
                     completion(nil, .invalidData)
                 }
             } else {  // The request has not succeeded - NOT OK
-                print(httpResponse.statusCode)
-                print("----------------------")
-                print(httpResponse.allHeaderFields.debugDescription)
-                print("----------------------")
+                print("The request has not succeeded -------")
+                print(" HTTP Response code: \(httpResponse.statusCode)")
+                //print(httpResponse.allHeaderFields.debugDescription)
+                print("-------------------------------------")
                 completion(nil, .responseUnsuccessful)
             }
             
