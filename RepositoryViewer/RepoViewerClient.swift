@@ -13,11 +13,14 @@ class RepoViewerAPIClient {
     // Example API call
     // https://api.github.com/repositories?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53
     
-    // Note: because since=0 will include the first hundred, numberOfHundredPacks should always get decreamented by 1
-    // formula to change two following variables: numberOfHundredPacks = (totalRepos / 100) - 1
-    // for 1000 repository, numberOfHundredPacks will be 9
+    
+    // DUE TO API LIMITATION totalRepos should not be > 5000,
+    // refer to https://developer.github.com/v3/#rate-limiting
+    // setting the number of desired repositories
     static let totalRepos = 500
-    let numberOfHundredPacks = 4
+    // Each request to https://api.github.com/repositories will return 100 repositories at max due to API limitation, endpoint only accept one paramter known as "since" to return pack of 100 repos
+    // Note: because since=0 will include the first hundred, that's why numberOfHundredPacks is decreamented by 1
+    let numberOfHundredPacks = (RepoViewerAPIClient.totalRepos / 100) - 1
     
     fileprivate let clientIDAndSecret = "?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53"
     
@@ -30,20 +33,18 @@ class RepoViewerAPIClient {
     let downloader = JSONDownloader()
     
     
-    // Each request to https://api.github.com/repositories will return 100 repositories at max due to API limitation
-    // Assumption I made is to work with only 1000 repos, hence the endpoint should be called 10 times
     func constructStringURLs() -> [String] {
         var urlsWithSinceParam: [String] = []
         
         for pageNumber in 0...numberOfHundredPacks {
             // endpoint only accept one paramter known as "since" to return pack of 100 repos
             // phrase "&since=pageNumber*100" should be appended to the url to get more than 100 repos
-            // since=0 will give 0 to 100 repos, since=100 will give 101 to 200 and so on
             var since = 0
             if pageNumber == 0 {
-                since = pageNumber * 100
+                // since=0 will give repos from 1 to 101 because IDs starts @ 1
+                since = 0
             } else {
-                // there id start at 1
+                // since=101 will give 101 to 201, and so on
                 since = pageNumber * 100 + 1
             }
             
@@ -98,8 +99,7 @@ class RepoViewerAPIClient {
         
         guard let finalUrl = URL(string: stringURLWithSecret) else {
             print("URL is not constructed properly")
-            // I want to halt the program execution if the url is not constructed properly
-            fatalError()
+            return
         }
         
         let request = URLRequest(url: finalUrl)
