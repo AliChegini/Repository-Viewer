@@ -65,9 +65,8 @@ class ViewController: UIViewController {
     
     
     func didCompletePopulation() {
-        // this is not called on the main thread
-        // to update the UI from here then use the main thread
         print("Final array is populated \(self.finalArray.count)")
+        // updating the UI from main thread
         DispatchQueue.main.async {
             self.label.text = "Data downloaded successfully!"
             self.viewResultButton.isEnabled = true
@@ -77,7 +76,6 @@ class ViewController: UIViewController {
         //let filteredArray = finalArray.filter { $0.language == "Ruby" }
         //print(filteredArray)
     }
-    
     
     
 

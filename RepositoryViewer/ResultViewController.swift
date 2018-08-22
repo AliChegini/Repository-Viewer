@@ -10,9 +10,11 @@ import UIKit
 
 class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    // array to hold the passed result from main view controller
     var finalArray: [SingleRepository]?
-    // result array after filter applied
     var finalArrayUnwrapped: [SingleRepository] = []
+    
+    // 2D array to hold the grouped language and use it to form sections and rows
     var groupedLanguage: [[SingleRepository]] = [[]]
     
     
@@ -26,27 +28,48 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         // setting delegate for search bar
         searchBar.delegate = self
         
-        // Table view setup
-        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        // Unwrapping the final array
         finalArrayUnwrapped = unwrapFinalArray(finalArray: finalArray)
         
-        let groupedDictionary = Dictionary(grouping: finalArrayUnwrapped) { (object) -> String in
-            var language = ""
+        // Grouping tha unwrapped final array, so it can be sorted and used to form sections
+        let groupedDictionaries = Dictionary(grouping: finalArrayUnwrapped) { (object) -> String in
+            var language = "Not Known to GitHub"
             if let languageUnwrapped = object.language {
                 language = languageUnwrapped
             }
             return language
         }
         
-        let keys = groupedDictionary.keys
         
+        // sorting the array of dictionaries with descending order based on size of array containing the values
+        let sortedGroupedDictionary =  groupedDictionaries.sorted(by: { ($0.value.count) > ($1.value.count) })
+        
+        // Getting all the keys
+        let keys = sortedGroupedDictionary.map{ $0.key }
+        
+       
+        
+        // -----------  should be moved to another controller
+        // array to hold the language counts
+        var counts: [String: Int] = [:]
+        
+        // Forming a dictionary ,the keys are language names, and values are occurences
+        for element in groupedDictionaries {
+            counts[element.key] = element.value.count
+        }
+        // ---------------------------------------------------
+        
+        
+        // Forming the sections
+        // each key represent name of a language as String
         for key in keys {
-            groupedLanguage.append(groupedDictionary[key]!)
+            if let groupedDictionaryValueUnwrapped = groupedDictionaries[key] {
+                groupedLanguage.append(groupedDictionaryValueUnwrapped)
+            }
         }
         
-        // calculate count of each ocuurences
-        // https://gist.github.com/adamloving/1a3226eed53eeb9baa39
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,7 +93,8 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     
     
     func filter(userInput: String) -> [SingleRepository]? {
-        let filteredArray = finalArray?.filter { $0.name == userInput }
+        // TODO: have to be fixed later
+        let filteredArray = finalArray?.filter { ($0.fullName?.contains(userInput))! }
         return filteredArray
     }
     
@@ -82,6 +106,7 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         }
         return final
     }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return groupedLanguage.count > 0 ? groupedLanguage.count : 1

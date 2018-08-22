@@ -14,10 +14,10 @@ class RepoViewerAPIClient {
     // https://api.github.com/repositories?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53
     
     
-    // DUE TO API LIMITATION totalRepos should not be > 5000,
+    // DUE TO API LIMITATION totalRepos we can only make 5000 request per hour with basic authentication,
     // refer to https://developer.github.com/v3/#rate-limiting
     // setting the number of desired repositories
-    static let totalRepos = 500
+    static let totalRepos = 200
     // Each request to https://api.github.com/repositories will return 100 repositories at max due to API limitation, endpoint only accept one paramter known as "since" to return pack of 100 repos
     // Note: because since=0 will include the first hundred, that's why numberOfHundredPacks is decreamented by 1
     let numberOfHundredPacks = (RepoViewerAPIClient.totalRepos / 100) - 1
