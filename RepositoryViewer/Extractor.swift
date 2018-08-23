@@ -30,6 +30,8 @@ class Extractor {
                 completionHandler(nil, error)
                 return
             }
+            
+            // with try? if an error is thrown while decoding, it will be handled by turning into optional value, threfore no need to wrap it in do-catch block
             let urlsPack = try? decoder.decode([RepositoryURL].self, from: data)
             
             if let urlsPackUnwrapped = urlsPack {
@@ -46,7 +48,6 @@ class Extractor {
                         let singlePack = try? decoder.decode(SingleRepository.self, from: data)
                         if let singlePackUnwrapped = singlePack {
                             self.allRepositories.append(singlePackUnwrapped)
-                            //print("size of all repositories: \(self.allRepositories.count)")
                             completionHandler(singlePackUnwrapped, nil)
                         } else {
                             print("single pack is empty")
@@ -55,7 +56,7 @@ class Extractor {
                     
                 } // End of loop
             } else {
-                print("get url is empty")
+                print("urlsPack is empty")
             }
             
         } // End of outer asynch call scope
