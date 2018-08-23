@@ -65,11 +65,6 @@ class Extractor {
     
 }
 
-//TOOD:
-// loop through 10 pages to get 1000 result back
-// UI should be button "Get full overview" -> numbers and languages -> find a way to load the cells as they come
-// taping on each language should show list of result for that language in new page
-//
 
 
 

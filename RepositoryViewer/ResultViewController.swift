@@ -21,15 +21,19 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     @IBOutlet weak var searchBar: UISearchBar!    
     @IBOutlet weak var tableView: UITableView!
     
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // setting delegate for search bar
         searchBar.delegate = self
         
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
         // Unwrapping the final array
         finalArrayUnwrapped = unwrapFinalArray(finalArray: finalArray)
+        
         
         // Grouping tha unwrapped final array, so it can be sorted and used to form sections
         let groupedDictionaries = Dictionary(grouping: finalArrayUnwrapped) { (object) -> String in
@@ -63,11 +67,16 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         // Forming the sections
         // each key represent name of a language as String
         for key in keys {
-            if let groupedDictionaryValueUnwrapped = groupedDictionaries[key] {
-                groupedLanguage.append(groupedDictionaryValueUnwrapped)
+            if var groupedDictionariesValueUnwrapped = groupedDictionaries[key] {
+                // sorting groupedLanguage based on most stars
+                groupedDictionariesValueUnwrapped.sort(by: { $0.stars! > $1.stars! })
+                groupedLanguage.append(groupedDictionariesValueUnwrapped)
             }
         }
         
+        
+        //groupedLanguage.sort(by: { $0[0].stars! < $1[0].stars! })
+        //print(groupedLanguage)
     }
     
 
@@ -123,7 +132,7 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell: MyCustomCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyCustomCell
         let singleRepository: SingleRepository
         
         if groupedLanguage.count > 0 {
@@ -132,8 +141,8 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
             singleRepository = finalArrayUnwrapped[indexPath.row]
         }
     
-        if let descriptionUnwrapped = singleRepository.description {
-            cell.textLabel?.text = "Description: \(descriptionUnwrapped)"
+        if let fullNameUnwrapped = singleRepository.fullName, let descriptionUnwrapped = singleRepository.description, let starsUnwrapped = singleRepository.stars, let forkUnwrapped = singleRepository.forks, let lastUpdateUnwrapped = singleRepository.lastUpdate, let idUnwrapped = singleRepository.id {
+            cell.myCellLabel.text = "\(fullNameUnwrapped)\n\n\(descriptionUnwrapped) \nStars: \(starsUnwrapped)      Forks: \(forkUnwrapped)\nupdated: \(lastUpdateUnwrapped)\n\(idUnwrapped)"
         }
         
         
@@ -152,6 +161,13 @@ class ResultViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         return label
     }
     
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
+//    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
     
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -13,6 +13,7 @@
 		7C256E372120A87B00B8338E /* RepoViewerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C256E362120A87B00B8338E /* RepoViewerClient.swift */; };
 		7C256E392120B15F00B8338E /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C256E382120B15F00B8338E /* JSONParser.swift */; };
 		7C4C4D6A212B23E9006EF3F0 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4C4D69212B23E9006EF3F0 /* ResultViewController.swift */; };
+		7C4D8756212EA0A9005D73B1 /* MyCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D8755212EA0A9005D73B1 /* MyCustomCell.swift */; };
 		7C6449F1211EF20400AFDB60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6449F0211EF20400AFDB60 /* AppDelegate.swift */; };
 		7C6449F3211EF20400AFDB60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6449F2211EF20400AFDB60 /* ViewController.swift */; };
 		7C6449F6211EF20400AFDB60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F4211EF20400AFDB60 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 		7C256E362120A87B00B8338E /* RepoViewerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewerClient.swift; sourceTree = "<group>"; };
 		7C256E382120B15F00B8338E /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		7C4C4D69212B23E9006EF3F0 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		7C4D8755212EA0A9005D73B1 /* MyCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCustomCell.swift; sourceTree = "<group>"; };
 		7C6449ED211EF20400AFDB60 /* RepositoryViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepositoryViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6449F0211EF20400AFDB60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C6449F2211EF20400AFDB60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				7CFC555A21230AC8007354E5 /* Extractor.swift */,
 				7C256E3221204ED500B8338E /* RepoViewerErrors.swift */,
 				7C256E34212061C400B8338E /* Extensions.swift */,
+				7C4D8755212EA0A9005D73B1 /* MyCustomCell.swift */,
 				7C6449F4211EF20400AFDB60 /* Main.storyboard */,
 				7C6449F7211EF20500AFDB60 /* Assets.xcassets */,
 				7C6449F9211EF20500AFDB60 /* LaunchScreen.storyboard */,
@@ -162,6 +165,7 @@
 				7C6449F3211EF20400AFDB60 /* ViewController.swift in Sources */,
 				7C256E3321204ED500B8338E /* RepoViewerErrors.swift in Sources */,
 				7C256E372120A87B00B8338E /* RepoViewerClient.swift in Sources */,
+				7C4D8756212EA0A9005D73B1 /* MyCustomCell.swift in Sources */,
 				7CFC555B21230AC8007354E5 /* Extractor.swift in Sources */,
 				7C6449F1211EF20400AFDB60 /* AppDelegate.swift in Sources */,
 				7C4C4D6A212B23E9006EF3F0 /* ResultViewController.swift in Sources */,

@@ -12,14 +12,10 @@ import UIKit
 class ViewController: UIViewController {
     
     var finalArray: [SingleRepository] = []
-    
     let extractor = Extractor()
     
-    
     @IBOutlet weak var label: UILabel!
-    
     @IBOutlet weak var percentage: UILabel!
-    
     @IBOutlet weak var viewResultButton: UIButton!
     
     override func viewDidLoad() {
@@ -28,7 +24,6 @@ class ViewController: UIViewController {
         print("Starting the program...")
         
         let serialQueue = DispatchQueue(label: "serialQueue")
-        //var count = 0
         
         var counter:Int = 0 {
             // Observer to update the percentage progress
@@ -71,12 +66,7 @@ class ViewController: UIViewController {
             self.label.text = "Data downloaded successfully!"
             self.viewResultButton.isEnabled = true
         }
-        
-        // filter
-        //let filteredArray = finalArray.filter { $0.language == "Ruby" }
-        //print(filteredArray)
     }
-    
     
 
     override func didReceiveMemoryWarning() {
@@ -86,7 +76,9 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! ResultViewController
-        vc.finalArray = finalArray
+        // removing duplicates and sending the finalArray to ResultViewController
+        // for uniqueElements definition refer to Extensions
+        vc.finalArray = finalArray.uniqueElements
     }
 
     

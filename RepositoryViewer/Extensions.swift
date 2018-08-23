@@ -28,6 +28,25 @@ extension JSONDownloader {
 
 
 
+// Extensions to remove duplicates
+extension SingleRepository: Equatable {
+    static func == (lhs: SingleRepository, rhs: SingleRepository) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+
+public extension Sequence where Element: Equatable {
+    var uniqueElements: [Element] {
+        return self.reduce(into: []) {
+            uniqueElements, element in
+            
+            if !uniqueElements.contains(element) {
+                uniqueElements.append(element)
+            }
+        }
+    }
+}
 
 
 
