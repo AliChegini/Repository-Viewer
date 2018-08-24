@@ -35,7 +35,6 @@ extension SingleRepository: Equatable {
     }
 }
 
-
 public extension Sequence where Element: Equatable {
     var uniqueElements: [Element] {
         return self.reduce(into: []) {
@@ -47,5 +46,6 @@ public extension Sequence where Element: Equatable {
         }
     }
 }
+
 
 

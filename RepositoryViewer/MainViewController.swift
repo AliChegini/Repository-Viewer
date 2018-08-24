@@ -49,7 +49,7 @@ class MainViewController: UIViewController {
         extractor.extractProperties { object, error in
             serialQueue.async { [weak self] in
                 counter += 1
-                print(counter)
+                print("Counter is: \(counter), Object ID: \(object?.id) ")
                 guard counter < RepoViewerAPIClient.totalRepos else  {
                     self?.didCompletePopulation()
                     return
@@ -104,9 +104,12 @@ class MainViewController: UIViewController {
         switch segue.identifier {
         case "resultSegue":
             let vc = segue.destination as! ResultViewController
-            // removing duplicates and sending the finalArray to ResultViewController
-            // for uniqueElements definition refer to Extensions
             vc.finalArray = finalArrayWithNoDuplicate
+            prepareGroupedDictionaries()
+            vc.groupedDictionaries = groupedDictionaries
+            
+        case "quickCountSegue":
+            let vc = segue.destination as! LanguageCountController
             prepareGroupedDictionaries()
             vc.groupedDictionaries = groupedDictionaries
         default:

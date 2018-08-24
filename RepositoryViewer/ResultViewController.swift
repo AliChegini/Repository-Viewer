@@ -38,7 +38,7 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
         groupedDictionariesUnwrapped = unwrapGroupDictionaries(groupedDictionaries: groupedDictionaries)
         
         
-        // sorting the array of dictionaries with descending order based on size of array containing the values
+        // sorting the array of dictionaries with descending order based on size of array containing the values (number of repositories in each language)
         let sortedGroupedDictionary =  groupedDictionariesUnwrapped.sorted(by: { ($0.value.count) > ($1.value.count) })
         
         // Getting all the keys
@@ -55,7 +55,6 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 groupedLanguage.append(groupedDictionariesValueUnwrapped)
             }
         }
-        
         
         
     }
@@ -89,6 +88,8 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Table view functions -------------------------------------
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        // Ternary operator --- question ? answer1 : answer2
+        // if count is bigger than 0 return it, otherwise return 1
         return groupedLanguage.count > 0 ? groupedLanguage.count : 1
     }
 

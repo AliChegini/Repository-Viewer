@@ -40,5 +40,10 @@ struct SingleRepository: Codable {
 }
 
 
+// struct to hold the language count object
+struct LanguageObject {
+    var language: String
+    var count: Int
+}
 
 

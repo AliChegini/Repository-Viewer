@@ -21,6 +21,7 @@
 		7C6449F6211EF20400AFDB60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F4211EF20400AFDB60 /* Main.storyboard */; };
 		7C6449F8211EF20500AFDB60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F7211EF20500AFDB60 /* Assets.xcassets */; };
 		7C6449FB211EF20500AFDB60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F9211EF20500AFDB60 /* LaunchScreen.storyboard */; };
+		7CF91760212FE18D0002F645 /* MyLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9175F212FE18D0002F645 /* MyLanguageCell.swift */; };
 		7CFC555B21230AC8007354E5 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC555A21230AC8007354E5 /* Extractor.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		7C6449F7211EF20500AFDB60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C6449FA211EF20500AFDB60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C6449FC211EF20500AFDB60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CF9175F212FE18D0002F645 /* MyLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLanguageCell.swift; sourceTree = "<group>"; };
 		7CFC555A21230AC8007354E5 /* Extractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +88,7 @@
 				7C256E3221204ED500B8338E /* RepoViewerErrors.swift */,
 				7C256E34212061C400B8338E /* Extensions.swift */,
 				7C4D8755212EA0A9005D73B1 /* MyCustomCell.swift */,
+				7CF9175F212FE18D0002F645 /* MyLanguageCell.swift */,
 				7C6449F4211EF20400AFDB60 /* Main.storyboard */,
 				7C6449F7211EF20500AFDB60 /* Assets.xcassets */,
 				7C6449F9211EF20500AFDB60 /* LaunchScreen.storyboard */,
@@ -176,6 +179,7 @@
 				7CFC555B21230AC8007354E5 /* Extractor.swift in Sources */,
 				7C4D875A212F142D005D73B1 /* LanguageCountController.swift in Sources */,
 				7C6449F1211EF20400AFDB60 /* AppDelegate.swift in Sources */,
+				7CF91760212FE18D0002F645 /* MyLanguageCell.swift in Sources */,
 				7C4C4D6A212B23E9006EF3F0 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
