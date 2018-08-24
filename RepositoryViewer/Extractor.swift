@@ -10,7 +10,7 @@ import Foundation
 
 
 // Class to extract the required properties and
-// provide ready to use object for ViewController
+// provide ready to use arrays for MainViewController
 class Extractor {
     private let client = RepoViewerAPIClient()
     private var allURLs: [RepositoryURL] = []
@@ -19,14 +19,14 @@ class Extractor {
     
     // Method to extract all the required properties
     // compromising of 2 asynchrounous call, (nested asynch call)
-    // one to get the urls and another call within the first call to extract all the propreties
+    // one to get the urls of each repo and another call within the first call to extract all the propreties of each repo
     func extractProperties(completionHandler: @escaping (SingleRepository?, RepoViewerErrors?) -> Void) {
         
         // Outer asynch call to extract urls of all repos
-        client.getFullPack() { data, error in
+        client.getHundredPackOfURLs() { data, error in
             let decoder = JSONDecoder()
             guard let data = data else {
-                print("data is empty from getFullPack()")
+                print("data is empty from getHundredPackOfURLs()")
                 completionHandler(nil, error)
                 return
             }
@@ -39,12 +39,13 @@ class Extractor {
                     self.allURLs.append(url)
                     
                     // Inner asynch call to extract required properties for each repo
-                    self.client.getSinglePack(url: url) { data, error in
+                    self.client.getSingleRepositoryInfo(url: url) { data, error in
                         guard let data = data else {
-                            print("data is empty from getSinglePack()")
+                            print("data is empty from getSingleRepositoryInfo()")
                             completionHandler(nil, error)
                             return
                         }
+                        // decoding info of each repo
                         let singlePack = try? decoder.decode(SingleRepository.self, from: data)
                         if let singlePackUnwrapped = singlePack {
                             self.allRepositories.append(singlePackUnwrapped)

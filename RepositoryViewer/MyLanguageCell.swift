@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Class to hold the outlet to populate labels in LanguageViewController
+// Class to hold the outlet to populate labels in LanguageViewController's cell
 
 class MyLanguageCell: UITableViewCell {
     @IBOutlet weak var language: UILabel!

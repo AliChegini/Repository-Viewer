@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Client class to be used in Extractor ----
+
 class RepoViewerAPIClient {
     
     // Example API call
@@ -19,16 +21,16 @@ class RepoViewerAPIClient {
     // setting the number of desired repositories
     static let totalRepos = 500
     // Each request to https://api.github.com/repositories will return 100 repositories at each page due to API limitation, endpoint only accept one paramter known as "since" to return pack of 100 repos per page
-    // Note: because since=0 will include the first hundred, that's why numberOfHundredPacks is decreamented by 1
-    let numberOfHundredPacks = (RepoViewerAPIClient.totalRepos / 100) - 1
+    // Note: because since=0 will include the first hundred, that's why pageNumberOfHundredPack is decreamented by 1
+    let pageNumberOfHundredPack = (RepoViewerAPIClient.totalRepos / 100) - 1
     
     fileprivate let clientIDAndSecret = "?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53"
     
     
-    lazy var fullPackURL: URL = {
+    lazy var urlForHundredPack: URL = {
         // Please Note: I used force unwrap here on purpose,
         // because I am 110% sure force Unwrap will succeed,
-        // and if URL is not constructed at this point, we should crash the app,
+        // and if URL is not constructed at this point, I need to crash the app,
         // since continuing the process without this URL is pointless
         return URL(string: "https://api.github.com/repositories\(clientIDAndSecret)")!
     }()
@@ -36,13 +38,13 @@ class RepoViewerAPIClient {
     
     let downloader = JSONDownloader()
     
-    
+    // method to construct and prepare string urls with since parameter appended to them
     func constructStringURLs() -> [String] {
         var urlsWithSinceParam: [String] = []
         
-        for pageNumber in 0...numberOfHundredPacks {
+        for pageNumber in 0...pageNumberOfHundredPack {
             // endpoint only accept one paramter known as "since" to return pack of 100 repos
-            // phrase "&since=pageNumber*100" should be appended to the url to get more than 100 repos
+            // phrase "&since=pageNumber*100" should be appended to the url to get the next 100 repos
             var since = 0
             if pageNumber == 0 {
                 // since=0 will give repos from 1 to 101 because IDs starts @ 1
@@ -54,7 +56,7 @@ class RepoViewerAPIClient {
             
             let phrase = "&since=\(since)"
             
-            var urlToString = fullPackURL.absoluteString
+            var urlToString = urlForHundredPack.absoluteString
             urlToString.append(phrase)
             urlsWithSinceParam.append(urlToString)
         }
@@ -64,8 +66,9 @@ class RepoViewerAPIClient {
     
     
     
-    // method to get full pack of repositories
-    func getFullPack(completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) {
+    // method to get urls of 100 pack of repositories in each request
+    // will be used as outer asynch call in Extractor class
+    func getHundredPackOfURLs(completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) {
         let array = constructStringURLs()
         
         for element in array {
@@ -90,15 +93,14 @@ class RepoViewerAPIClient {
     
     
     // method to get full info for a single repository using its url
-    func getSinglePack(url: RepositoryURL, completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) {
+    // will be used as inner asynch call in Extractor class
+    func getSingleRepositoryInfo(url: RepositoryURL, completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) {
         guard let stringURLUnwrapped = url.url else {
             print("from getSinglePack() string url is empty")
             return
         }
         var stringURLWithSecret = stringURLUnwrapped
         stringURLWithSecret.append(clientIDAndSecret)
-        
-        //print("url from inside getSinglePAck(): \(stringURLWithSecret) ")
         
         guard let finalUrl = URL(string: stringURLWithSecret) else {
             print("URL is not constructed properly")

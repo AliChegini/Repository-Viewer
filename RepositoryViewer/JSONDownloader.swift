@@ -21,7 +21,7 @@ class JSONDownloader {
     }
     
     
-    // Asynchronous networking call to download json from the API
+    // Asynchronous networking call to download json from GitHub API
     func dataTask(with request: URLRequest, completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) -> URLSessionDataTask {
         let task = session.dataTask(with: request) { data, response, error in
             

@@ -95,6 +95,7 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // when groupedLanguage is empty, finalArrayUnwrapped is used for tableView
         if groupedLanguage.count > 0 {
             return groupedLanguage[section].count
         }
@@ -106,6 +107,7 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell: MyCustomCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MyCustomCell
         let singleRepository: SingleRepository
         
+        // when groupedLanguage is empty populate the cells with finalArrayUnwrapped
         if groupedLanguage.count > 0 {
             singleRepository = groupedLanguage[indexPath.section][indexPath.row]
         } else {
@@ -113,12 +115,12 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     
         if let fullNameUnwrapped = singleRepository.fullName, let descriptionUnwrapped = singleRepository.description, let starsUnwrapped = singleRepository.stars, let forkUnwrapped = singleRepository.forks, let lastUpdateUnwrapped = singleRepository.lastUpdate {
-            cell.myCellLabel.text = "\(fullNameUnwrapped)\n\n\(descriptionUnwrapped) \nStars: \(starsUnwrapped)      Forks: \(forkUnwrapped)\nupdated: \(lastUpdateUnwrapped)"
+            cell.myCellLabel.text = "\(fullNameUnwrapped)\n\n\(descriptionUnwrapped) \nStars: \(starsUnwrapped)      Forks: \(forkUnwrapped)\nUpdated: \(lastUpdateUnwrapped)"
         }
         return cell
     }
     
-    
+    // setting header for sections
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.backgroundColor = UIColor.lightGray
@@ -138,18 +140,4 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return label
     }
     
-
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath)
-//
-//    }
-    
-    
-//    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath)
-//
-//    }
-    
-    // Table view override functions ------
 }

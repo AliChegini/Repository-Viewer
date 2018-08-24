@@ -49,7 +49,7 @@ class MainViewController: UIViewController {
         extractor.extractProperties { object, error in
             serialQueue.async { [weak self] in
                 counter += 1
-                print("Counter is: \(counter), Object ID: \(object?.id) ")
+                print("Count is: \(counter)")
                 guard counter < RepoViewerAPIClient.totalRepos else  {
                     self?.didCompletePopulation()
                     return
@@ -100,7 +100,7 @@ class MainViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // sending needed data via segues to other controllers
+        // sending data via segues to other controllers
         switch segue.identifier {
         case "resultSegue":
             let vc = segue.destination as! ResultViewController

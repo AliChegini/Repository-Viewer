@@ -46,20 +46,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // function to filter array based on userInput
     func filter(userInput: String, array: [SingleRepository] ) -> [SingleRepository] {
          let filteredArray = array.filter { ($0.fullName?.contains(userInput))! }
          return filteredArray
      }
     
     
-    
+    // will only be called when user tap on search
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchBarTextUnwrapped = searchBar.text {
             self.lowerCasedUserInput = searchBarTextUnwrapped.lowercased()
             
             filteredResult = filter(userInput: self.lowerCasedUserInput, array: finalArrayUnwrapped)
-    
+            
+            // reloading data for tableView
             tableView.reloadData()
             searchBar.endEditing(true)
         }
@@ -71,6 +72,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // when filteredResult is empty, non filtered array is used for tableView
         if filteredResult.count > 0 {
             return filteredResult.count
         }
@@ -82,6 +84,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         
         let singleRepository: SingleRepository
         
+        // when filteredResult is empty populate the cells with non filtered array
         if filteredResult.count > 0 {
             singleRepository = filteredResult[indexPath.row]
         } else {

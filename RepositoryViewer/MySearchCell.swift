@@ -9,6 +9,7 @@
 import UIKit
 
 // Class to hold the outlet to populate the label in SearchViewController's cell
+
 class MySearchCell: UITableViewCell {
     @IBOutlet weak var myResultLabel: UILabel!
 }
