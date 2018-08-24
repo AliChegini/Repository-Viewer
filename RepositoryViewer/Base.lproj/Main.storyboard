@@ -187,17 +187,57 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="izh-jD-b3S">
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCell" id="7OB-Nh-Sra" customClass="MySearchCell" customModule="RepositoryViewer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7OB-Nh-Sra" id="oOL-MC-V5X">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBh-J4-ty3">
+                                                    <rect key="frame" x="15" y="11" width="345" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fBh-J4-ty3" firstAttribute="bottom" secondItem="oOL-MC-V5X" secondAttribute="bottomMargin" id="1M0-x0-O84"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fBh-J4-ty3" secondAttribute="trailing" id="A3v-Do-eCH"/>
+                                                <constraint firstItem="fBh-J4-ty3" firstAttribute="leading" secondItem="oOL-MC-V5X" secondAttribute="leadingMargin" id="FJj-MQ-cCP"/>
+                                                <constraint firstItem="fBh-J4-ty3" firstAttribute="top" secondItem="oOL-MC-V5X" secondAttribute="topMargin" id="fsr-Xf-6ve"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="myResultLabel" destination="fBh-J4-ty3" id="9l5-QJ-Daf"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="IgY-RW-5rS" id="Gch-rc-m4R"/>
+                                    <outlet property="delegate" destination="IgY-RW-5rS" id="cXg-n9-7dB"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="lYo-Vg-HbJ" firstAttribute="trailing" secondItem="izh-jD-b3S" secondAttribute="trailing" id="7LW-JE-15t"/>
                             <constraint firstItem="aKM-Zu-mrk" firstAttribute="top" secondItem="lYo-Vg-HbJ" secondAttribute="top" id="XDw-XX-5Ry"/>
+                            <constraint firstItem="izh-jD-b3S" firstAttribute="leading" secondItem="lYo-Vg-HbJ" secondAttribute="leading" id="YWn-N1-TO8"/>
                             <constraint firstItem="aKM-Zu-mrk" firstAttribute="leading" secondItem="lYo-Vg-HbJ" secondAttribute="leading" id="grL-Ws-QDG"/>
+                            <constraint firstItem="lYo-Vg-HbJ" firstAttribute="bottom" secondItem="izh-jD-b3S" secondAttribute="bottom" id="lUc-11-ICl"/>
+                            <constraint firstItem="izh-jD-b3S" firstAttribute="top" secondItem="aKM-Zu-mrk" secondAttribute="bottom" id="sRQ-s4-D7f"/>
                             <constraint firstItem="aKM-Zu-mrk" firstAttribute="trailing" secondItem="lYo-Vg-HbJ" secondAttribute="trailing" id="uwm-Af-UzR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lYo-Vg-HbJ"/>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="aKM-Zu-mrk" id="kUt-3V-SzD"/>
+                        <outlet property="tableView" destination="izh-jD-b3S" id="uwz-9M-Bnf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghh-g9-hCa" userLabel="First Responder" sceneMemberID="firstResponder"/>

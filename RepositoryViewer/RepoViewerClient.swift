@@ -17,8 +17,8 @@ class RepoViewerAPIClient {
     // DUE TO API LIMITATION totalRepos we can only make 5000 request per hour with basic authentication,
     // refer to https://developer.github.com/v3/#rate-limiting
     // setting the number of desired repositories
-    static let totalRepos = 200
-    // Each request to https://api.github.com/repositories will return 100 repositories at max due to API limitation, endpoint only accept one paramter known as "since" to return pack of 100 repos
+    static let totalRepos = 500
+    // Each request to https://api.github.com/repositories will return 100 repositories at each page due to API limitation, endpoint only accept one paramter known as "since" to return pack of 100 repos per page
     // Note: because since=0 will include the first hundred, that's why numberOfHundredPacks is decreamented by 1
     let numberOfHundredPacks = (RepoViewerAPIClient.totalRepos / 100) - 1
     
@@ -26,6 +26,10 @@ class RepoViewerAPIClient {
     
     
     lazy var fullPackURL: URL = {
+        // Please Note: I used force unwrap here on purpose,
+        // because I am 110% sure force Unwrap will succeed,
+        // and if URL is not constructed at this point, we should crash the app,
+        // since continuing the process without this URL is pointless
         return URL(string: "https://api.github.com/repositories\(clientIDAndSecret)")!
     }()
     
@@ -49,7 +53,6 @@ class RepoViewerAPIClient {
             }
             
             let phrase = "&since=\(since)"
-            print(phrase)
             
             var urlToString = fullPackURL.absoluteString
             urlToString.append(phrase)

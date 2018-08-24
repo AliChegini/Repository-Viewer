@@ -100,18 +100,20 @@ class MainViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        // sending needed data via segues to other controllers
         switch segue.identifier {
         case "resultSegue":
             let vc = segue.destination as! ResultViewController
             vc.finalArray = finalArrayWithNoDuplicate
             prepareGroupedDictionaries()
             vc.groupedDictionaries = groupedDictionaries
-            
         case "quickCountSegue":
             let vc = segue.destination as! LanguageCountController
             prepareGroupedDictionaries()
             vc.groupedDictionaries = groupedDictionaries
+        case "searchSegue":
+            let vc = segue.destination as! SearchViewController
+            vc.finalArray = finalArrayWithNoDuplicate
         default:
             return
         }
