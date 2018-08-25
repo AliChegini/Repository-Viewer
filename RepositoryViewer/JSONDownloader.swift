@@ -30,8 +30,10 @@ class JSONDownloader {
             if let urlError = error as? URLError {
                 switch urlError.code {
                 case .notConnectedToInternet:
+                    print("internet went off")
                     self.showAlert()
                 case .networkConnectionLost:
+                    print("internet went off")
                     self.showAlert()
                 default: break
                 }

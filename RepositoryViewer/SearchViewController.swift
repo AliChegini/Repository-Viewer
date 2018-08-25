@@ -46,19 +46,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
     
-    // function to filter array based on userInput
-    func filter(userInput: String, array: [SingleRepository] ) -> [SingleRepository] {
-         let filteredArray = array.filter { ($0.fullName?.contains(userInput))! }
-         return filteredArray
-     }
-    
     
     // will only be called when user tap on search
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let searchBarTextUnwrapped = searchBar.text {
-            self.lowerCasedUserInput = searchBarTextUnwrapped.lowercased()
-            
-            filteredResult = filter(userInput: self.lowerCasedUserInput, array: finalArrayUnwrapped)
+            lowerCasedUserInput = searchBarTextUnwrapped.lowercased()
+            // avoid force unwrapping by comparing to true
+            filteredResult = finalArrayUnwrapped.filter { $0.fullName?.contains(lowerCasedUserInput) == true }
+            if filteredResult.count == 0 {
+                print("Result not found based on query: \(lowerCasedUserInput)")
+            }
             
             // reloading data for tableView
             tableView.reloadData()
@@ -67,9 +64,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     
     
-    //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-    //        print("searchText \(searchText)")
-    //    }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        let lowerCasedSearchText = searchText.lowercased()
+//        print("searchText \(lowerCasedSearchText)")
+//
+//        let keysForAutoComplete = finalArrayUnwrapped.map { $0.fullName }
+//
+//        let tempFilteredResult = keysForAutoComplete.filter { ($0?.contains("abc")) == true }
+//
+//    }
+    
+    
+    // Table View functions -------------------
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // when filteredResult is empty, non filtered array is used for tableView

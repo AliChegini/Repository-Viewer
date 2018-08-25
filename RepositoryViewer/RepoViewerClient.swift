@@ -12,14 +12,14 @@ import Foundation
 
 class RepoViewerAPIClient {
     
-    // Example API call
+    // Example of API call
     // https://api.github.com/repositories?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53
     
     
     // DUE TO API LIMITATION totalRepos we can only make 5000 request per hour with basic authentication,
     // refer to https://developer.github.com/v3/#rate-limiting
     // setting the number of desired repositories
-    static let totalRepos = 500
+    static let totalRepos = 1000
     // Each request to https://api.github.com/repositories will return 100 repositories at each page due to API limitation, endpoint only accept one paramter known as "since" to return pack of 100 repos per page
     // Note: because since=0 will include the first hundred, that's why pageNumberOfHundredPack is decreamented by 1
     let pageNumberOfHundredPack = (RepoViewerAPIClient.totalRepos / 100) - 1
@@ -63,7 +63,6 @@ class RepoViewerAPIClient {
         
         return urlsWithSinceParam
     }
-    
     
     
     // method to get urls of 100 pack of repositories in each request
@@ -110,7 +109,7 @@ class RepoViewerAPIClient {
         let request = URLRequest(url: finalUrl)
         let task = downloader.dataTask(with: request) { data, error in
             guard let data = data else {
-                print("Error from getSinglePack() \(error.debugDescription)")
+                print("Error from getSingleRepositoryInfo() \(error.debugDescription)")
                 completion(nil, error)
                 return
             }

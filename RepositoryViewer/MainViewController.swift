@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         disableButtons()
-        print("Starting the program...)")
+        print("Starting the program...")
         
         let serialQueue = DispatchQueue(label: "serialQueue")
         
@@ -43,14 +43,14 @@ class MainViewController: UIViewController {
             }
         }
         
-        // check for Network Connection
+        // check for Network Connection at the beginning
         if NetworkChecker.Connection() == true {
             // body of the closure is wrapped into another closure executed through a serial queue
             // making sure the shared resources finalArray and counter are accessed safely
             extractor.extractProperties { object, error in
                 serialQueue.async { [weak self] in
                     counter += 1
-                    print("Count is: \(counter)")
+                    print("Request count is: \(counter)")
                     guard counter < RepoViewerAPIClient.totalRepos else  {
                         self?.didCompletePopulation()
                         return
