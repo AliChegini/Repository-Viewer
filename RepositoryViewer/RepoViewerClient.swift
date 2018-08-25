@@ -80,7 +80,7 @@ class RepoViewerAPIClient {
             let request = URLRequest(url: url)
             let task = downloader.dataTask(with: request) { data, error in
                 guard let data = data else {
-                    print("Error from getFullPack(): \(error.debugDescription)")
+                    print("Error from getHundredPackOfURLs(): \(error.debugDescription)")
                     completion(nil, error)
                     return
                 }
@@ -96,7 +96,7 @@ class RepoViewerAPIClient {
     // will be used as inner asynch call in Extractor class
     func getSingleRepositoryInfo(url: RepositoryURL, completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) {
         guard let stringURLUnwrapped = url.url else {
-            print("from getSinglePack() string url is empty")
+            print("from getSingleRepositoryInfo() string url is empty")
             return
         }
         var stringURLWithSecret = stringURLUnwrapped

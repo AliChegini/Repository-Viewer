@@ -29,49 +29,86 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         disableButtons()
-        print("Starting the program...")
+        print("Starting the program... \(NetworkChecker.Connection())")
+        
         
         let serialQueue = DispatchQueue(label: "serialQueue")
         
         var counter:Int = 0 {
             // Observer to update the percentage progress
             didSet {
-                let fractionalProgress = Float(counter) / Float(RepoViewerAPIClient.totalRepos) * 100.0
+                let fractionalProgress = Float(counter) / Float(RepoViewerAPIClient.totalRepos) * 100
                 DispatchQueue.main.async {
                     self.percentage.text = ("\(fractionalProgress) %")
                 }
             }
         }
         
-    
-        // body of the closure is wrapped into another closure executed through a serial queue
-        // making sure the shared resources finalArray and counter are accessed safely
-        extractor.extractProperties { object, error in
-            serialQueue.async { [weak self] in
-                counter += 1
-                print("Count is: \(counter)")
-                guard counter < RepoViewerAPIClient.totalRepos else  {
-                    self?.didCompletePopulation()
-                    return
+        
+        if NetworkChecker.Connection() == true {
+            // body of the closure is wrapped into another closure executed through a serial queue
+            // making sure the shared resources finalArray and counter are accessed safely
+            extractor.extractProperties { object, error in
+                serialQueue.async { [weak self] in
+                    counter += 1
+                    print("Count is: \(counter)")
+                    guard counter < RepoViewerAPIClient.totalRepos else  {
+                        self?.didCompletePopulation()
+                        return
+                    }
+                    
+                    guard let object = object else {
+                        print("Extractor did not reutrn data --- Main View Controller")
+                        return
+                    }
+                    self?.finalArray.append(object)
+                }
+            }
+            // if connection is out
+        } else {
+            // Reading the user defaults to extract available data
+            if let data = UserDefaults.standard.value(forKey: "finalArrayWithNoDuplicate") as? Data {
+                let offlineArray = try? PropertyListDecoder().decode([SingleRepository].self, from: data)
+                if let offlineArrayUnwrapped = offlineArray {
+                    finalArrayWithNoDuplicate = offlineArrayUnwrapped
+                    print("finalArrayWithNoDuplicate size is: \(finalArrayWithNoDuplicate.count)")
                 }
                 
-                guard let object = object else {
-                    print("Extractor did not reutrn data --- Main View Controller")
-                    return
-                }
-                self?.finalArray.append(object)
             }
         }
         
+        
+    
+    
     }
     
     
     func didCompletePopulation() {
+    // TODO: create static bool in JSONDownloader
+    // if connected, the following
+        
         print("Final array is populated and may have duplicates \(self.finalArray.count)")
         
         // removing duplicates --- for uniqueElements definition refer to Extensions
         finalArrayWithNoDuplicate = finalArray.uniqueElements
         print("Size of the array after removing duplicates \(self.finalArrayWithNoDuplicate.count)")
+        
+        // Store prepared array in user defaults for offline use
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(finalArrayWithNoDuplicate), forKey:"finalArrayWithNoDuplicate")
+        print("finalArrayWithNoDuplicate is saved into UserDefaults for offline use")
+    
+        
+        
+        
+        
+        
+        
+    // if NotConnected the following
+        
+        
+        
+        // TODO: static bool value to update the UI differently
+        
         
         // updating the UI from main thread
         DispatchQueue.main.async {

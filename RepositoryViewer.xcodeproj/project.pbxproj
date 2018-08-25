@@ -16,6 +16,7 @@
 		7C4D8756212EA0A9005D73B1 /* MyCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D8755212EA0A9005D73B1 /* MyCustomCell.swift */; };
 		7C4D8758212F10AC005D73B1 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D8757212F10AC005D73B1 /* SearchViewController.swift */; };
 		7C4D875A212F142D005D73B1 /* LanguageCountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4D8759212F142D005D73B1 /* LanguageCountController.swift */; };
+		7C593A552131558100EFC42F /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C593A542131558100EFC42F /* NetworkChecker.swift */; };
 		7C6449F1211EF20400AFDB60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6449F0211EF20400AFDB60 /* AppDelegate.swift */; };
 		7C6449F3211EF20400AFDB60 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6449F2211EF20400AFDB60 /* MainViewController.swift */; };
 		7C6449F6211EF20400AFDB60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F4211EF20400AFDB60 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		7C4D8755212EA0A9005D73B1 /* MyCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCustomCell.swift; sourceTree = "<group>"; };
 		7C4D8757212F10AC005D73B1 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7C4D8759212F142D005D73B1 /* LanguageCountController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCountController.swift; sourceTree = "<group>"; };
+		7C593A542131558100EFC42F /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
 		7C6449ED211EF20400AFDB60 /* RepositoryViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepositoryViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6449F0211EF20400AFDB60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C6449F2211EF20400AFDB60 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				7C4D8755212EA0A9005D73B1 /* MyCustomCell.swift */,
 				7CF9175F212FE18D0002F645 /* MyLanguageCell.swift */,
 				7CF9176121304BF60002F645 /* MySearchCell.swift */,
+				7C593A542131558100EFC42F /* NetworkChecker.swift */,
 				7C6449F4211EF20400AFDB60 /* Main.storyboard */,
 				7C6449F7211EF20500AFDB60 /* Assets.xcassets */,
 				7C6449F9211EF20500AFDB60 /* LaunchScreen.storyboard */,
@@ -173,6 +176,7 @@
 			files = (
 				7C256E35212061C400B8338E /* Extensions.swift in Sources */,
 				7C4D8758212F10AC005D73B1 /* SearchViewController.swift in Sources */,
+				7C593A552131558100EFC42F /* NetworkChecker.swift in Sources */,
 				7C256E3121204E7D00B8338E /* JSONDownloader.swift in Sources */,
 				7C256E392120B15F00B8338E /* JSONParser.swift in Sources */,
 				7C6449F3211EF20400AFDB60 /* MainViewController.swift in Sources */,

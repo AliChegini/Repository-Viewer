@@ -25,7 +25,8 @@ class JSONDownloader {
     func dataTask(with request: URLRequest, completionHandler completion: @escaping (Data?, RepoViewerErrors?) -> Void) -> URLSessionDataTask {
         let task = session.dataTask(with: request) { data, response, error in
             
-            // Alert the user for connection related errors
+            // Alert the user for connection related errors,
+            // and set the static bool to false
             if let urlError = error as? URLError {
                 switch urlError.code {
                 case .notConnectedToInternet:

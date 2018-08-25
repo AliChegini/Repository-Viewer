@@ -21,7 +21,7 @@ extension JSONDownloader {
     // helper method to alert the user about connection lost, to show the cached data later
     func showAlert(){
         let alert = UIAlertController(title: "Error", message: "No Internet Connection \n You can see the cached result...", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK, Show cached results", style: .default, handler: nil))
         alert.presentInOwnWindow(animated: true, completion: nil)
     }
 }
