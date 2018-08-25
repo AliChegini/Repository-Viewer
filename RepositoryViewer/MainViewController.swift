@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  RepositoryViewer
 //
 //  Created by Ehsan on 11/08/2018.
@@ -29,8 +29,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         disableButtons()
-        print("Starting the program... \(NetworkChecker.Connection())")
-        
+        print("Starting the program...)")
         
         let serialQueue = DispatchQueue(label: "serialQueue")
         
@@ -44,7 +43,7 @@ class MainViewController: UIViewController {
             }
         }
         
-        
+        // check for Network Connection
         if NetworkChecker.Connection() == true {
             // body of the closure is wrapped into another closure executed through a serial queue
             // making sure the shared resources finalArray and counter are accessed safely
@@ -64,29 +63,30 @@ class MainViewController: UIViewController {
                     self?.finalArray.append(object)
                 }
             }
-            // if connection is out
+        // when device is offline, reads data from UserDefaults
         } else {
             // Reading the user defaults to extract available data
             if let data = UserDefaults.standard.value(forKey: "finalArrayWithNoDuplicate") as? Data {
                 let offlineArray = try? PropertyListDecoder().decode([SingleRepository].self, from: data)
                 if let offlineArrayUnwrapped = offlineArray {
+                    // populating the array from UserDefaults
                     finalArrayWithNoDuplicate = offlineArrayUnwrapped
-                    print("finalArrayWithNoDuplicate size is: \(finalArrayWithNoDuplicate.count)")
                 }
-                
             }
+            
+            // updating the UI from main thread
+            DispatchQueue.main.async {
+                self.label.text = "Device is Offline, but you can see the cached result"
+                self.percentage.text = ("100 %")
+                self.enableButtons()
+            }
+            
         }
         
-        
-    
-    
     }
     
     
     func didCompletePopulation() {
-    // TODO: create static bool in JSONDownloader
-    // if connected, the following
-        
         print("Final array is populated and may have duplicates \(self.finalArray.count)")
         
         // removing duplicates --- for uniqueElements definition refer to Extensions
@@ -97,19 +97,6 @@ class MainViewController: UIViewController {
         UserDefaults.standard.set(try? PropertyListEncoder().encode(finalArrayWithNoDuplicate), forKey:"finalArrayWithNoDuplicate")
         print("finalArrayWithNoDuplicate is saved into UserDefaults for offline use")
     
-        
-        
-        
-        
-        
-        
-    // if NotConnected the following
-        
-        
-        
-        // TODO: static bool value to update the UI differently
-        
-        
         // updating the UI from main thread
         DispatchQueue.main.async {
             self.label.text = "Data downloaded successfully!"
@@ -154,8 +141,6 @@ class MainViewController: UIViewController {
         default:
             return
         }
-        
-        
     }
     
     
