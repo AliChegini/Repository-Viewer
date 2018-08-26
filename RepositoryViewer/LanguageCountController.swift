@@ -35,7 +35,6 @@ class LanguageCountController: UIViewController, UITableViewDelegate, UITableVie
         // Sorting based on language counts (values)
         sortedCounts = languageCounts.sorted(by: { $0.value > $1.value })
 
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +51,6 @@ class LanguageCountController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MyLanguageCell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath) as! MyLanguageCell
         
-
         if sortedCounts.count > 0 {
             // [(key: String, value: Int)]
             let names = sortedCounts.map { $0.key }
@@ -71,7 +69,6 @@ class LanguageCountController: UIViewController, UITableViewDelegate, UITableVie
 
         return cell
     }
-    
     
 
 }

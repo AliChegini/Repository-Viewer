@@ -24,17 +24,9 @@ class RepoViewerAPIClient {
     // Note: because since=0 will include the first hundred, that's why pageNumberOfHundredPack is decreamented by 1
     let pageNumberOfHundredPack = (RepoViewerAPIClient.totalRepos / 100) - 1
     
-    fileprivate let clientIDAndSecret = "?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53"
+    fileprivate static let clientIDAndSecret = "?client_id=bf645279e7f46a051182&client_secret=b8b7c8ecd5dd75c56c99d54810c1591a661e3a53"
     
-    
-    lazy var urlForHundredPack: URL = {
-        // Please Note: I used force unwrap here on purpose,
-        // because I am 110% sure force Unwrap will succeed,
-        // and if URL is not constructed at this point, I need to crash the app,
-        // since continuing the process without this URL is pointless
-        return URL(string: "https://api.github.com/repositories\(clientIDAndSecret)")!
-    }()
-    
+    static let urlForHundredPack = "https://api.github.com/repositories\(clientIDAndSecret)"
     
     let downloader = JSONDownloader()
     
@@ -56,7 +48,7 @@ class RepoViewerAPIClient {
             
             let phrase = "&since=\(since)"
             
-            var urlToString = urlForHundredPack.absoluteString
+            var urlToString = RepoViewerAPIClient.urlForHundredPack
             urlToString.append(phrase)
             urlsWithSinceParam.append(urlToString)
         }
@@ -98,8 +90,9 @@ class RepoViewerAPIClient {
             print("from getSingleRepositoryInfo() string url is empty")
             return
         }
+        // appending clientIDAndSecret to the url of each repo
         var stringURLWithSecret = stringURLUnwrapped
-        stringURLWithSecret.append(clientIDAndSecret)
+        stringURLWithSecret.append(RepoViewerAPIClient.clientIDAndSecret)
         
         guard let finalUrl = URL(string: stringURLWithSecret) else {
             print("URL is not constructed properly")
@@ -120,9 +113,6 @@ class RepoViewerAPIClient {
     
     
 }
-
-
-
 
 
 

@@ -63,20 +63,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         }
     }
     
-    
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        let lowerCasedSearchText = searchText.lowercased()
-//        print("searchText \(lowerCasedSearchText)")
-//
-//        let keysForAutoComplete = finalArrayUnwrapped.map { $0.fullName }
-//
-//        let tempFilteredResult = keysForAutoComplete.filter { ($0?.contains("abc")) == true }
-//
-//    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var detailToSend: SingleRepository
         if filteredResult.count > 0 {
             detailToSend = filteredResult[indexPath.row]
@@ -94,7 +82,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     
     
-    
     // Table View functions -------------------
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,6 +91,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         }
         return finalArrayUnwrapped.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
@@ -117,7 +105,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         } else {
             singleRepository = finalArrayUnwrapped[indexPath.row]
         }
-        
         
         if let fullNameUnwrapped = singleRepository.fullName, let descriptionUnwrapped = singleRepository.description, let starsUnwrapped = singleRepository.stars, let forkUnwrapped = singleRepository.forks, let lastUpdateUnwrapped = singleRepository.lastUpdate, let languageUnwrapped = singleRepository.language {
             cell.myResultLabel.text = "\(fullNameUnwrapped)\n\n\(languageUnwrapped)\n\(descriptionUnwrapped) \nStars: \(starsUnwrapped)      Forks: \(forkUnwrapped)\nUpdated: \(lastUpdateUnwrapped)"

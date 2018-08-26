@@ -122,7 +122,7 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    // Setting header for sections
+    // Populating headers for sections
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.backgroundColor = UIColor.lightGray
