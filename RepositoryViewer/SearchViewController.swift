@@ -75,6 +75,26 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
 //    }
     
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var detailToSend: SingleRepository
+        if filteredResult.count > 0 {
+            detailToSend = filteredResult[indexPath.row]
+        } else {
+            detailToSend = finalArrayUnwrapped[indexPath.row]
+        }
+        performSegue(withIdentifier: "showDetailSegue", sender: detailToSend)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DetailViewController, let detailToSend = sender as? SingleRepository {
+            vc.detail = detailToSend
+        }
+    }
+    
+    
+    
     // Table View functions -------------------
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,6 +124,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
         
         return cell
     }
-
+    
     
 }

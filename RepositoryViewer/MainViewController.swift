@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var percentage: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
     
     @IBOutlet weak var languageCountButton: UIButton!
     @IBOutlet weak var searchRepoButton: UIButton!
@@ -39,6 +40,7 @@ class MainViewController: UIViewController {
                 let fractionalProgress = Float(counter) / Float(RepoViewerAPIClient.totalRepos) * 100
                 DispatchQueue.main.async {
                     self.percentage.text = ("\(fractionalProgress) %")
+                    self.progressView.setProgress(fractionalProgress/100, animated: true)
                 }
             }
         }
@@ -78,6 +80,7 @@ class MainViewController: UIViewController {
             DispatchQueue.main.async {
                 self.label.text = "Device is Offline, but you can see the cached result"
                 self.percentage.text = ("100 %")
+                self.progressView.setProgress(100/100, animated: true)
                 self.enableButtons()
             }
             
@@ -127,17 +130,20 @@ class MainViewController: UIViewController {
         // sending data via segues to other controllers
         switch segue.identifier {
         case "resultSegue":
-            let vc = segue.destination as! ResultViewController
-            vc.finalArray = finalArrayWithNoDuplicate
-            prepareGroupedDictionaries()
-            vc.groupedDictionaries = groupedDictionaries
+            if let vc = segue.destination as? ResultViewController {
+                vc.finalArray = finalArrayWithNoDuplicate
+                prepareGroupedDictionaries()
+                vc.groupedDictionaries = groupedDictionaries
+            }
         case "quickCountSegue":
-            let vc = segue.destination as! LanguageCountController
-            prepareGroupedDictionaries()
-            vc.groupedDictionaries = groupedDictionaries
+            if let vc = segue.destination as? LanguageCountController {
+                prepareGroupedDictionaries()
+                vc.groupedDictionaries = groupedDictionaries
+            }
         case "searchSegue":
-            let vc = segue.destination as! SearchViewController
-            vc.finalArray = finalArrayWithNoDuplicate
+            if let vc = segue.destination as? SearchViewController {
+                vc.finalArray = finalArrayWithNoDuplicate
+            }
         default:
             return
         }

@@ -22,6 +22,7 @@
 		7C6449F6211EF20400AFDB60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F4211EF20400AFDB60 /* Main.storyboard */; };
 		7C6449F8211EF20500AFDB60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F7211EF20500AFDB60 /* Assets.xcassets */; };
 		7C6449FB211EF20500AFDB60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6449F9211EF20500AFDB60 /* LaunchScreen.storyboard */; };
+		7C666578213275A6008DC642 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C666577213275A6008DC642 /* DetailViewController.swift */; };
 		7CF91760212FE18D0002F645 /* MyLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9175F212FE18D0002F645 /* MyLanguageCell.swift */; };
 		7CF9176221304BF60002F645 /* MySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF9176121304BF60002F645 /* MySearchCell.swift */; };
 		7CFC555B21230AC8007354E5 /* Extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFC555A21230AC8007354E5 /* Extractor.swift */; };
@@ -45,6 +46,7 @@
 		7C6449F7211EF20500AFDB60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C6449FA211EF20500AFDB60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C6449FC211EF20500AFDB60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C666577213275A6008DC642 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7CF9175F212FE18D0002F645 /* MyLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLanguageCell.swift; sourceTree = "<group>"; };
 		7CF9176121304BF60002F645 /* MySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySearchCell.swift; sourceTree = "<group>"; };
 		7CFC555A21230AC8007354E5 /* Extractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractor.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				7C4C4D69212B23E9006EF3F0 /* ResultViewController.swift */,
 				7C4D8757212F10AC005D73B1 /* SearchViewController.swift */,
 				7C4D8759212F142D005D73B1 /* LanguageCountController.swift */,
+				7C666577213275A6008DC642 /* DetailViewController.swift */,
 				7C256E3021204E7D00B8338E /* JSONDownloader.swift */,
 				7C256E382120B15F00B8338E /* JSONParser.swift */,
 				7C256E362120A87B00B8338E /* RepoViewerClient.swift */,
@@ -181,6 +184,7 @@
 				7C256E392120B15F00B8338E /* JSONParser.swift in Sources */,
 				7C6449F3211EF20400AFDB60 /* MainViewController.swift in Sources */,
 				7C256E3321204ED500B8338E /* RepoViewerErrors.swift in Sources */,
+				7C666578213275A6008DC642 /* DetailViewController.swift in Sources */,
 				7C256E372120A87B00B8338E /* RepoViewerClient.swift in Sources */,
 				7C4D8756212EA0A9005D73B1 /* MyCustomCell.swift in Sources */,
 				7CFC555B21230AC8007354E5 /* Extractor.swift in Sources */,

@@ -138,15 +138,21 @@
                                     <segue destination="dx1-k7-yf2" kind="show" identifier="quickCountSegue" id="Mg6-Zb-2qZ"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oGM-6B-3vB">
+                                <rect key="frame" x="26" y="247" width="323" height="2"/>
+                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rRA-wa-5Sf" secondAttribute="trailing" constant="20" id="0NH-hg-p7w"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KIf-iU-uzn" secondAttribute="trailing" constant="30" id="1K7-dd-cgw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Edc-V9-uEH" secondAttribute="bottom" constant="40" id="DvR-gO-LlI"/>
+                            <constraint firstItem="oGM-6B-3vB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="Hd3-oQ-VVK"/>
                             <constraint firstItem="rRA-wa-5Sf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="L7n-zx-jYZ"/>
                             <constraint firstItem="rRA-wa-5Sf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rwg-dr-DQB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oZV-Ot-cAW" secondAttribute="trailing" constant="30" id="Vyh-09-T23"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oGM-6B-3vB" secondAttribute="trailing" constant="10" id="Yph-W2-YOe"/>
                             <constraint firstItem="Edc-V9-uEH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="ZHz-g3-FjT"/>
                             <constraint firstItem="rRA-wa-5Sf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="bp8-9Z-41e"/>
                             <constraint firstItem="Mfz-XC-ydk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d8f-Zw-36i"/>
@@ -154,6 +160,7 @@
                             <constraint firstItem="rRA-wa-5Sf" firstAttribute="top" secondItem="Mfz-XC-ydk" secondAttribute="bottom" constant="20" id="pnd-6e-2Lr"/>
                             <constraint firstItem="KIf-iU-uzn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="qAU-jw-TB4"/>
                             <constraint firstItem="Edc-V9-uEH" firstAttribute="top" secondItem="KIf-iU-uzn" secondAttribute="bottom" constant="20" id="s2P-V7-k8V"/>
+                            <constraint firstItem="Mfz-XC-ydk" firstAttribute="top" secondItem="oGM-6B-3vB" secondAttribute="bottom" constant="30" id="tVz-eu-1Vb"/>
                             <constraint firstItem="oZV-Ot-cAW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="ySd-FE-R1H"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Edc-V9-uEH" secondAttribute="trailing" constant="30" id="zTm-5Z-MlR"/>
                         </constraints>
@@ -164,6 +171,7 @@
                         <outlet property="label" destination="rRA-wa-5Sf" id="had-u5-lNz"/>
                         <outlet property="languageCountButton" destination="oZV-Ot-cAW" id="jkA-fW-DgN"/>
                         <outlet property="percentage" destination="Mfz-XC-ydk" id="LaF-ge-XlD"/>
+                        <outlet property="progressView" destination="oGM-6B-3vB" id="iOT-6p-f60"/>
                         <outlet property="searchRepoButton" destination="KIf-iU-uzn" id="8Tg-0l-rQG"/>
                         <outlet property="viewResultButton" destination="Edc-V9-uEH" id="lNN-4M-R7o"/>
                     </connections>
@@ -235,11 +243,44 @@
                     <connections>
                         <outlet property="searchBar" destination="aKM-Zu-mrk" id="kUt-3V-SzD"/>
                         <outlet property="tableView" destination="izh-jD-b3S" id="uwz-9M-Bnf"/>
+                        <segue destination="gCZ-VL-0ml" kind="show" identifier="showDetailSegue" id="lZJ-BU-hye"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghh-g9-hCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="854"/>
+            <point key="canvasLocation" x="990" y="852"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="wOb-Y3-kfo">
+            <objects>
+                <viewController id="gCZ-VL-0ml" customClass="DetailViewController" customModule="RepositoryViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Wc-u0-ikj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something went wrong while unwrapping, Please try another cell" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Th2-Ih-LVQ">
+                                <rect key="frame" x="10" y="64" width="355" height="503"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Th2-Ih-LVQ" firstAttribute="top" secondItem="7Zh-8z-hfp" secondAttribute="top" id="CUJ-97-UTG"/>
+                            <constraint firstItem="7Zh-8z-hfp" firstAttribute="trailing" secondItem="Th2-Ih-LVQ" secondAttribute="trailing" constant="10" id="jqa-pH-GkK"/>
+                            <constraint firstItem="Th2-Ih-LVQ" firstAttribute="leading" secondItem="7Zh-8z-hfp" secondAttribute="leading" constant="10" id="tcb-im-9EU"/>
+                            <constraint firstItem="7Zh-8z-hfp" firstAttribute="bottom" secondItem="Th2-Ih-LVQ" secondAttribute="bottom" constant="100" id="wmG-t8-2vL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7Zh-8z-hfp"/>
+                    </view>
+                    <connections>
+                        <outlet property="detailLabel" destination="Th2-Ih-LVQ" id="ulp-aH-Iew"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oEb-ap-IlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1966" y="853"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="Hrx-FK-GIY">
