@@ -19,7 +19,7 @@ class Extractor {
     
     // Method to extract all the required properties
     // compromising of 2 asynchrounous call, (nested asynch call)
-    // one to get the urls of each repo and another call within the first call to extract all the propreties of each repo
+    // one call to get the urls of each repo and another call within the first call to extract all the propreties of each repo
     func extractProperties(completionHandler: @escaping (SingleRepository?, RepoViewerErrors?) -> Void) {
         
         // Outer asynch call to extract urls of all repos
@@ -31,7 +31,7 @@ class Extractor {
                 return
             }
             
-            // with try? if an error is thrown while decoding, it will be handled by turning into optional value, threfore no need to wrap it in do-catch block
+            // with try? if an error is thrown while decoding, it will be handled by turning into optional value, therefore no need to wrap it in do-catch block
             let urlsPack = try? decoder.decode([RepositoryURL].self, from: data)
             
             if let urlsPackUnwrapped = urlsPack {

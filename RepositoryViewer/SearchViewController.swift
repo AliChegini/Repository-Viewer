@@ -106,6 +106,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
         let cell: MySearchCell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as! MySearchCell
         
         let singleRepository: SingleRepository

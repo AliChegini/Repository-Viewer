@@ -27,7 +27,7 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        // auto sizing cells
         self.tableView.estimatedRowHeight = 100
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -50,7 +50,9 @@ class ResultViewController: UIViewController, UITableViewDelegate, UITableViewDa
         for key in keys {
             if var groupedDictionariesValueUnwrapped = groupedDictionariesUnwrapped[key] {
                 // sorting each language array based on most stars
-                groupedDictionariesValueUnwrapped.sort(by: { $0.stars! > $1.stars! })
+                // I used the nil coalescing operator ?? to safely unwrap the values and replace nil with Int.min to place the items at the end of the array
+                // if API returns nil for stars value, then it can't be sorted so I just place them at the end
+                groupedDictionariesValueUnwrapped.sort(by: { ($0.stars ?? Int.min) > ($1.stars ?? Int.min)  })
                 // appending the sorted array to groupedLanguage
                 groupedLanguage.append(groupedDictionariesValueUnwrapped)
             }
