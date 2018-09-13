@@ -1,6 +1,7 @@
 GitHub Repository Viewer written in Swift By Ali Chegini 
 
 Raw Project Description:
+
 Implement basic data fetching using GitHub REST API v3, viewing logic without using third party frameworks.
 
 When typing owner/user name in search field, all repos belong to that owner/user listed as result in the list view.
